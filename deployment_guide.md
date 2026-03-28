@@ -16,10 +16,17 @@ This guide ensures your frontend and backend are perfectly environmentalized and
 
 1. **New Web Service**: Select the `Portfolio.git` repository.
 2. **Root Directory**: Set to `backend`.
-3. **Runtime**: Docker (Automatically detected from `backend/Dockerfile`).
-4. **Environment**:
-   - Port: `5000` (Make sure your `backend/index.js` listens on `process.env.PORT || 5000`).
-5. **Connect**: Link to your Firebase/Firestore service account if needed.
+3. **Runtime**: Docker.
+4. **Environment Variables (CRITICAL)**:
+   - `PORT`: `8080` (or leave as default).
+   - `JWT_SECRET`: Any secure random string.
+   - `RENDER_EXTERNAL_URL`: Your actual Render service URL.
+   - `FIREBASE_SERVICE_ACCOUNT`: Copy the **entire JSON** from your Firebase Service Account key file.
+5. **How to get Firebase Key**:
+   - Go to **Firebase Console** > Project Settings > Service Accounts.
+   - Click **Generate New Private Key**.
+   - Open the `.json` file, copy everything, and paste it into the Render variable.
+6. **Deployment**: Automatic deployments on every `git push`.
 
 ## 📦 Local Optimization (Optional)
 
