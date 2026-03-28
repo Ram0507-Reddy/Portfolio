@@ -19,24 +19,63 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Function to fix PEM formatting for Firebase private keys
+const fixPEM = (key) => {
+    if (!key) return null;
+    let formatted = key.replace(/\\n/g, '\n'); // Handle literal \n strings
+    if (!formatted.includes('\n') && formatted.length > 50) {
+        // If the key is a single line, re-insert required newlines for PEM format
+        formatted = formatted
+            .replace('-----BEGIN PRIVATE KEY-----', '-----BEGIN PRIVATE KEY-----\n')
+            .replace('-----END PRIVATE KEY-----', '\n-----END PRIVATE KEY-----');
+    }
+    return formatted.trim();
+};
+
 // --- FIREBASE INITIALIZATION ---
+// Priority 1: Render Secret File (/etc/secrets/firebase-service-account.json)
+// Priority 2: FIREBASE_SERVICE_ACCOUNT (JSON string)
+// Priority 3: Individual Env Vars (FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY)
+let serviceAccount = null;
+
 try {
-    const rawVal = process.env.FIREBASE_SERVICE_ACCOUNT;
-    const serviceAccount = rawVal ? JSON.parse(rawVal) : null;
+    const secretFilePath = '/etc/secrets/firebase-service-account.json';
+    if (fs.existsSync(secretFilePath)) {
+        serviceAccount = fs.readJsonSync(secretFilePath);
+        console.log("📂 Firebase Init: Loaded from Render Secret File.");
+    } else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+        serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+        console.log("💎 Firebase Init: Loaded from JSON Env Var.");
+    } else if (process.env.FIREBASE_PRIVATE_KEY) {
+        serviceAccount = {
+            projectId: process.env.FIREBASE_PROJECT_ID,
+            clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+            privateKey: process.env.FIREBASE_PRIVATE_KEY
+        };
+        console.log("🔑 Firebase Init: Loaded from individual Env Vars.");
+    }
 
     if (serviceAccount) {
-        // Fix for private key newlines in different environments
-        if (serviceAccount.private_key) {
-            serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
-        }
+        const pKey = serviceAccount.private_key || serviceAccount.privateKey;
+        const normalizedKey = fixPEM(pKey);
+        
+        const certObj = {
+            projectId: serviceAccount.project_id || serviceAccount.projectId,
+            clientEmail: serviceAccount.client_email || serviceAccount.clientEmail,
+            privateKey: normalizedKey
+        };
 
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-            storageBucket: `${serviceAccount.project_id}.appspot.com`
-        });
-        console.log("✅ Firebase Admin Initialized (Production Mode)");
+        if (certObj.projectId && certObj.clientEmail && certObj.privateKey) {
+            admin.initializeApp({
+                credential: admin.credential.cert(certObj),
+                storageBucket: `${certObj.projectId}.appspot.com`
+            });
+            console.log(`✅ Firebase Admin Initialized [Project: ${certObj.projectId}]`);
+        } else {
+            console.warn("⚠️ Partial Firebase Credentials. Skipping init.");
+        }
     } else {
-        console.warn("⚠️ FIREBASE_SERVICE_ACCOUNT not found. Running in ephemeral local mode.");
+        console.warn("⚠️ No Firebase Credentials found. Running in ephemeral local mode.");
     }
 } catch (error) {
     console.error("❌ Firebase Init Failed:", error.message);
