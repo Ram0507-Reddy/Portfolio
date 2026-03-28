@@ -3,7 +3,7 @@
 
 window.ZERO_LABS_CONFIG = {
     // REPLACE THIS with your Render URL after deployment (e.g., "https://zero-labs-backend.onrender.com")
-    API_URL: "http://localhost:8080",
+    API_URL: "https://portfolio-backend-brr6.onrender.com",
     
     // Automatic switching logic (Optional)
     getEffectiveApiUrl: function() {

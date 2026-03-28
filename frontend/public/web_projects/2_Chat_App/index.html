@@ -95,14 +95,9 @@
         </main>
     </div>
 
-    <!-- Include Dynamic Config & Socket.io -->
+    <!-- Include Dynamic Config & Socket.io CDN -->
     <script src="../../config.js"></script>
-    <script>
-        // Inject socket.io client dynamically from the configured API URL
-        const script = document.createElement('script');
-        script.src = (window.ZERO_LABS_CONFIG ? window.ZERO_LABS_CONFIG.getEffectiveApiUrl() : 'http://localhost:8080') + '/socket.io/socket.io.js';
-        document.head.appendChild(script);
-    </script>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
     <script src="script.js"></script>
 
 </body>

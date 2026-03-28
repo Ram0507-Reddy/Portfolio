@@ -3,7 +3,7 @@ const API_URL = (window.ZERO_LABS_CONFIG)
     ? window.ZERO_LABS_CONFIG.getEffectiveApiUrl() 
     : (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
         ? 'http://localhost:8080' 
-        : 'https://zero-labs-backend.onrender.com');
+        : 'https://portfolio-backend-brr6.onrender.com');
 
 const socket = io(API_URL);
 
