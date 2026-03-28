@@ -1,5 +1,6 @@
 const express = require('express');
 const http = require('http');
+const https = require('https');
 const { Server } = require("socket.io");
 const path = require('path');
 const fs = require('fs-extra');
@@ -20,11 +21,15 @@ app.use(express.urlencoded({ extended: true }));
 
 // --- FIREBASE INITIALIZATION ---
 try {
-    const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT 
-        ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT) 
-        : null;
+    const rawVal = process.env.FIREBASE_SERVICE_ACCOUNT;
+    const serviceAccount = rawVal ? JSON.parse(rawVal) : null;
 
     if (serviceAccount) {
+        // Fix for private key newlines in different environments
+        if (serviceAccount.private_key) {
+            serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+        }
+
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
             storageBucket: `${serviceAccount.project_id}.appspot.com`
@@ -184,8 +189,9 @@ app.get('/health', (req, res) => res.send('Zero Labs Cloud Status: OPERATIONAL')
 // --- RENDER KEEP-ALIVE ---
 const SELF_URL = process.env.RENDER_EXTERNAL_URL;
 if (SELF_URL) {
+    const requester = SELF_URL.startsWith('https') ? https : http;
     setInterval(() => {
-        http.get(`${SELF_URL}/health`, (res) => {
+        requester.get(`${SELF_URL}/health`, (res) => {
             console.log(`[Keep-Alive] Heartbeat: ${res.statusCode}`);
         }).on('error', (err) => {
             console.error(`[Keep-Alive] Failed: ${err.message}`);
