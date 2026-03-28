@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application — Zero Labs</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9ImJsYWNrIi8+DQogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDgsIDgpIHNjYWxlKDAuMTg3NSkiPg0KICAgICA8ZGVmcz4NCiAgICAgICAgPG1hc2sgaWQ9ImZhdi1tYXNrIiBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBtYXNrQ29udGVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeD0iLTEwMDAiIHk9Ii0xMDAwIiB3aWR0aD0iNTAwMCIgaGVpZ2h0PSI1MDAwIj4NCiAgICAgICAgICAgIDxyZWN0IHg9Ii0xMDAwIiB5PSItMTAwMCIgd2lkdGg9IjUwMDAiIGhlaWdodD0iNTAwMCIgZmlsbD0id2hpdGUiLz4NCiAgICAgICAgICAgIDxwYXRoIGQ9Ik0yNSAyMzEgQSA5MDAgOTAwIDAgMCAxIDIzMSAyNSBBIDkwMCA5MDAgMCAwIDEgMjUgMjMxIFoiIGZpbGw9ImJsYWNrIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4NCiAgICAgICAgPC9tYXNrPg0KICAgICA8L2RlZnM+DQogICAgIDxwYXRoIGQ9Ik0xMjggMjhDNzIuNzcxNSAyOCAyOCA3Mi43NzE1IDI4IDEyOEMyOCAxODMuMjI4IDcyLjc3MTUgMjI4IDEyOCAyMjhDMTgzLjIyOCAyMjggMjI4IDE4My4yMjggMjI4IDEyOEMyMjggNzIuNzcxNSAxODMuMjI4IDI4IDEyOCAyOFpNNDggMTI4QzQ4IDgzLjgxNzIgODMuODE3MiA0OCAxMjggNDhDMTcyLjE4MyA0OCAyMDggODMuODE3MiAyMDggMTI4QzIwOCAxNzIuMTgzIDE3Mi4xODMgMjA4IDEyOCAyMDhDODMuODE3MiAyMDggNDggMTcyLjE4MyA0OCAxMjhaIiBmaWxsPSJ3aGl0ZSIgbWFzaz0idXJsKCNmYXYtbWFzaykiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIi8+DQogICAgIDxwYXRoIGQ9Ik0yNSAyMzEgQSA5MDAgOTAwIDAgMCAxIDIzMSAyNSBBIDkwMCA5MDAgMCAwIDEgMjUgMjMxIFoiIGZpbGw9IndoaXRlIi8+DQogIDwvZz4NCjwvc3ZnPg0K" />
+</head>
+
+<body>
+
+    <!-- Step 1: Login / Join Room Setup (from CyberSec layout) -->
+    <div id="setup-container">
+        <h2>SECURE ENTRY</h2>
+        <input type="text" id="username" class="input-box" placeholder="Your Display Name" autocomplete="off" />
+        <input type="text" id="room-id" class="input-box" placeholder="Secret Room ID" autocomplete="off" />
+        <button class="btn" id="join-btn">Enter Hub</button>
+        <p style="margin-top:20px; font-size:11px; color:#555; letter-spacing: 1px; text-transform: uppercase;">
+            Encrypted WebSockets Session
+        </p>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button id="menu-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+
+    <!-- Step 2: Main Chat Application Layout (from CyberSec) -->
+    <div id="chat-container">
+        <!-- Sidebar (25%) -->
+        <aside class="chat-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="header-avatar" id="header-ava">#</div>
+                <div class="room-details">
+                    <h3 id="room-name-display">Central Hub</h3>
+                    <div class="room-status">
+                        <div class="status-dot" id="conn-dot"></div>
+                        <span id="conn-status">Awaiting Connection...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-title">Active Nodes</div>
+                <!-- Connected users list injected here by socket.io -->
+                <ul id="users-list" style="list-style: none; display: flex; flex-direction: column; gap: 8px;"></ul>
+            </div>
+
+            <div class="sidebar-section" style="margin-top: auto;">
+                <div class="section-title">Connection Log</div>
+                <div id="status-log" style="font-size: 11px; color: #444; height: 100px; overflow-y: auto;">
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat (75%) -->
+        <main class="chat-main">
+            <div class="chat-messages" id="messages-box">
+                <!-- Chat messages injected here -->
+            </div>
+
+            <div class="chat-input-area" style="position: relative;">
+
+                <!-- File Upload functionality -->
+                <input type="file" id="file-input" style="display: none;" />
+                <button class="attach-btn" id="attach-btn" title="Attach Multimedia">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48">
+                        </path>
+                    </svg>
+                </button>
+                <div id="file-preview"
+                    style="display:none; position:absolute; top:-40px; left:40px; background:rgba(255,255,255,0.1); padding:4px 10px; border-radius:10px; font-size:12px; color:#fff;">
+                </div>
+
+                <input type="text" id="message-input" placeholder="Type a transmission..." autocomplete="off" />
+                <button class="send-btn" id="send-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="currentColor" />
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Include Dynamic Config & Socket.io -->
+    <script src="../../config.js"></script>
+    <script>
+        // Inject socket.io client dynamically from the configured API URL
+        const script = document.createElement('script');
+        script.src = (window.ZERO_LABS_CONFIG ? window.ZERO_LABS_CONFIG.getEffectiveApiUrl() : 'http://localhost:8080') + '/socket.io/socket.io.js';
+        document.head.appendChild(script);
+    </script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

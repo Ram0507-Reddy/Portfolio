@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Translucent Weather</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+</head>
+
+<body>
+    <div class="weather-card">
+        <h2 class="glass-title">ATMOS <span class="accent">2026</span></h2>
+
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Enter City (e.g. New York) or Coordinates">
+            <button id="searchBtn">SCAN</button>
+        </div>
+
+        <div class="weather-info" id="weatherData">
+            <!-- Data will be dynamically injected here via open-meteo -->
+            <div class="loader">Awaiting Input...</div>
+        </div>
+    </div>
+
+    <!-- 3D Decor -->
+    <div class="cube cube-1"></div>
+    <div class="cube cube-2"></div>
+
+    <script src="script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<!-- ZERO-LABS-FOOTER-START -->
+    <style>
+        /* Force body to be a column flex to prevent side-by-side overlap with our relative footer */
+        body {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            min-height: 100vh !important;
+            margin: 0 !important;
+        }
+        .zero-labs-footer {
+            position: relative !important;
+            width: 100% !important;
+            background-color: transparent !important;
+            color: #71717a !important;
+            text-align: center !important;
+            padding: 40px 0 20px 0 !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            font-size: 13px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 8px !important;
+            margin-top: auto !important; /* Push to bottom of flex container */
+            clear: both !important;
+        }
+        .zero-labs-footer .z-top-row {
+            display: flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            font-weight: 500 !important;
+        }
+        .zero-labs-footer .z-separator {
+            color: #d4d4d8 !important;
+            opacity: 0.5;
+        }
+        .zero-labs-footer a {
+            color: #18181b !important;
+            text-decoration: none !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            font-weight: 600 !important;
+            transition: opacity 0.2s !important;
+        }
+        @media (prefers-color-scheme: dark) {
+            .zero-labs-footer a { color: #ffffff !important; }
+            .zero-labs-footer { color: #a1a1aa !important; }
+        }
+        .zero-labs-footer a:hover {
+            opacity: 0.7 !important;
+        }
+        .zero-labs-footer .z-logo-icon {
+            height: 16px !important;
+            width: auto !important;
+            filter: invert(0.2);
+        }
+        @media (prefers-color-scheme: dark) {
+            .zero-labs-footer .z-logo-icon { filter: none !important; }
+        }
+        .zero-labs-footer .z-copyright {
+            font-size: 10px !important;
+            color: #a1a1aa !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.8px !important;
+            font-weight: 500 !important;
+        }
+    </style>
+    <div class="zero-labs-footer">
+        <div class="z-top-row">
+            <span>Shriram Reddy</span>
+            <span class="z-separator">|</span>
+            <span>Built with</span>
+            <a href="https://zero-s.tech" target="_blank" rel="noopener noreferrer">
+                <img src="assets/logo.svg" alt="Zero Labs" class="z-logo-icon">
+                ZERO LABS
+            </a>
+        </div>
+        <div class="z-copyright">
+            © 2026 SHRIRAM REDDY. ALL RIGHTS RESERVED.
+        </div>
+    </div>
+<!-- ZERO-LABS-FOOTER-END -->
+
+</body>
+
+</html>

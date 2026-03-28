@@ -1,0 +1,316 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Outfit', sans-serif;
+    background-color: #030303;
+    color: #f4f4f5;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Luxury 3D Background */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    width: 90vw;
+    height: 90vw;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: -1;
+    opacity: 0.08;
+    animation: drift 45s ease-in-out infinite alternate;
+}
+
+body::before {
+    background: radial-gradient(circle, #666, #000);
+    top: -40vh;
+    left: -40vw;
+}
+
+body::after {
+    background: radial-gradient(circle, #555, #111);
+    bottom: -40vh;
+    right: -40vw;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes drift {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(15vw, 10vh) scale(1.3);
+    }
+}
+
+/* Glassmorphism 2.0 Container */
+.glass-container {
+    background: rgba(15, 15, 15, 0.5);
+    backdrop-filter: blur(60px) saturate(180%);
+    -webkit-backdrop-filter: blur(60px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 60px 150px rgba(0, 0, 0, 0.95),
+        inset 0 0 40px rgba(255, 255, 255, 0.03);
+    border-radius: 32px;
+    padding: 70px;
+    width: 92%;
+    max-width: 950px;
+    text-align: center;
+    margin: 100px 20px;
+    flex-shrink: 0;
+}
+
+header {
+    margin-bottom: 60px;
+}
+
+h1 {
+    letter-spacing: 5px;
+    margin-bottom: 25px;
+    font-weight: 200;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+}
+
+.accent {
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+/* Progress System */
+.progress-wrapper {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #555, #fff);
+    transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.input-group {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+input {
+    flex: 1;
+    padding: 24px 32px;
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    font-size: 19px;
+    font-family: inherit;
+    font-weight: 300;
+}
+
+/* Button Overhaul */
+.primary-btn,
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.primary-btn {
+    background: #fff;
+    color: #000;
+    padding: 0 45px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.icon-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #a1a1aa;
+    width: 80px;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.primary-btn:hover {
+    background: #e4e4e7;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+}
+
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+/* Task List Glass Style */
+ul {
+    list-style: none;
+    padding: 0 10px 0 0;
+    margin: 0;
+    max-height: 55vh;
+    overflow-y: auto;
+}
+
+ul::-webkit-scrollbar {
+    width: 4px;
+}
+
+ul::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+li {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 20px;
+    padding: 24px 32px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.5s var(--premium-ease, cubic-bezier(0.23, 1, 0.32, 1));
+    cursor: grab;
+    position: relative;
+}
+
+li.dragging {
+    opacity: 0.4;
+    scale: 0.95;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.task-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    flex: 1;
+}
+
+.task-text {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.scheduled-badge {
+    font-size: 11px;
+    color: #71717a;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Priority Glows */
+li[data-priority="high"] {
+    border-left: 4px solid #ef4444;
+}
+
+li[data-priority="medium"] {
+    border-left: 4px solid #f59e0b;
+}
+
+li[data-priority="low"] {
+    border-left: 4px solid #3b82f6;
+}
+
+li.completed {
+    opacity: 0.4;
+    text-decoration: line-through;
+    filter: grayscale(1);
+}
+
+.delete-btn {
+    background: transparent;
+    color: #71717a;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.delete-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.grab-handle {
+    color: #3f3f46;
+    margin-right: 20px;
+    cursor: grab;
+}
+
+/* Responsiveness Overlay */
+@media (max-width: 768px) {
+    .glass-container {
+        padding: 40px;
+        margin: 40px 15px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .input-group {
+        flex-direction: column;
+        gap: 15px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    input,
+    .primary-btn,
+    .icon-btn {
+        width: 100%;
+        border-radius: 15px !important;
+        padding: 20px !important;
+    }
+}
+
+.secondary-btn {
+    background: transparent;
+    color: #a1a1aa;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 14px 30px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.2);
+}

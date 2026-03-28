@@ -1,0 +1,31 @@
+/* Luxury 3D Minimalist Tokens */
+:root {
+  --background: #F2F2F2; /* Soft grey background */
+  --foreground: #1A1A1A; /* Deep charcoal/black */
+  
+  /* Slate/Silver Palette */
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-400: #94A3B8;
+  --slate-500: #64748B;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1E293B;
+  --slate-900: #0F172A;
+
+  /* 3D Depth Tokens */
+  --shadow-3d: 0 10px 40px -10px rgba(0, 0, 0, 0.1), 0 5px 20px -5px rgba(0, 0, 0, 0.05);
+  --shadow-3d-hover: 0 30px 60px -15px rgba(0, 0, 0, 0.2), 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+  --shadow-3d-deep: 0 40px 100px -20px rgba(0, 0, 0, 0.4), 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+  --inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.8), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+  --border-glass: rgba(0, 0, 0, 0.05);
+
+  /* Lightened Depth Gradients */
+  --grad-deep-slate: linear-gradient(135deg, var(--slate-700) 0%, var(--slate-900) 100%);
+  --grad-technical-silver: linear-gradient(135deg, var(--slate-50) 0%, var(--slate-200) 50%, var(--slate-300) 100%);
+  --grad-studio-light: radial-gradient(at 50% 0%, var(--slate-50) 0%, var(--slate-100) 40%, var(--slate-100) 100%);
+  --grad-shape-cuboid: linear-gradient(135deg, var(--slate-200) 0%, var(--slate-400) 40%, var(--slate-600) 100%);
+  --grad-shape-faceted: linear-gradient(135deg, var(--slate-400) 0%, var(--slate-200) 30%, var(--slate-100) 100%);
+}

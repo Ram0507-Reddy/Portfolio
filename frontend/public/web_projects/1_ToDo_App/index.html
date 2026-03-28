@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks 2026 | Premium To-Do</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+</head>
+
+<body>
+    <div class="glass-container">
+        <header>
+            <h1>Tasks <span class="accent">2026</span></h1>
+            <div class="progress-wrapper">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </header>
+
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="What's the next objective?">
+            <input type="date" id="dateInput" class="hidden" title="Due date" placeholder="Due date">
+            <button id="futureBtn" class="icon-btn" title="Schedule for later">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+            </button>
+            <button id="addBtn" class="primary-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Add Task</span>
+            </button>
+        </div>
+
+        <ul id="taskList"></ul>
+
+        <footer>
+            <button id="clearBtn" class="secondary-btn hidden">Clear Completed</button>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<!-- ZERO-LABS-FOOTER-START -->
+    <style>
+        /* Force body to be a column flex to prevent side-by-side overlap with our relative footer */
+        body {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            min-height: 100vh !important;
+            margin: 0 !important;
+        }
+        .zero-labs-footer {
+            position: relative !important;
+            width: 100% !important;
+            background-color: transparent !important;
+            color: #71717a !important;
+            text-align: center !important;
+            padding: 40px 0 20px 0 !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            font-size: 13px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 8px !important;
+            margin-top: auto !important; /* Push to bottom of flex container */
+            clear: both !important;
+        }
+        .zero-labs-footer .z-top-row {
+            display: flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            font-weight: 500 !important;
+        }
+        .zero-labs-footer .z-separator {
+            color: #d4d4d8 !important;
+            opacity: 0.5;
+        }
+        .zero-labs-footer a {
+            color: #18181b !important;
+            text-decoration: none !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            font-weight: 600 !important;
+            transition: opacity 0.2s !important;
+        }
+        @media (prefers-color-scheme: dark) {
+            .zero-labs-footer a { color: #ffffff !important; }
+            .zero-labs-footer { color: #a1a1aa !important; }
+        }
+        .zero-labs-footer a:hover {
+            opacity: 0.7 !important;
+        }
+        .zero-labs-footer .z-logo-icon {
+            height: 16px !important;
+            width: auto !important;
+            filter: invert(0.2);
+        }
+        @media (prefers-color-scheme: dark) {
+            .zero-labs-footer .z-logo-icon { filter: none !important; }
+        }
+        .zero-labs-footer .z-copyright {
+            font-size: 10px !important;
+            color: #a1a1aa !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.8px !important;
+            font-weight: 500 !important;
+        }
+    </style>
+    <div class="zero-labs-footer">
+        <div class="z-top-row">
+            <span>Shriram Reddy</span>
+            <span class="z-separator">|</span>
+            <span>Built with</span>
+            <a href="https://zero-s.tech" target="_blank" rel="noopener noreferrer">
+                <img src="assets/logo.svg" alt="Zero Labs" class="z-logo-icon">
+                ZERO LABS
+            </a>
+        </div>
+        <div class="z-copyright">
+            © 2026 SHRIRAM REDDY. ALL RIGHTS RESERVED.
+        </div>
+    </div>
+<!-- ZERO-LABS-FOOTER-END -->
+
+</body>
+
+</html>
